@@ -1,0 +1,161 @@
+{
+    "cpt_codes": {
+        "require_data": [
+            "clinical_cpt_codes"
+        ],
+        "actions": [
+            [
+                "loop_tuple_array",
+                {
+                    "data_name": "clinical_cpt_codes",
+                    "skip_in_last_loop": 1,
+                    "loop_actions": [
+                        [
+                            "keyboard_write",
+                            {
+                                "tuple_index": 1,
+                                "can_paste": true,
+                                "interval": 0.01
+                            }
+                        ],
+                        [
+                            "keyboard_press",
+                            {
+                                "key": "enter",
+                                "presses": 1,
+                                "interval": 0.1
+                            }
+                        ],
+                        [
+                            "check_loading",
+                            {
+                                "template_name": "check_code_results",
+                                "close_window": false,
+                                "select_result": false
+                            }
+                        ],
+                        [
+                            "keyboard_press",
+                            {
+                                "key": "tab",
+                                "presses": 2,
+                                "interval": 0.1
+                            }
+                        ],
+                        [
+                            "keyboard_press",
+                            {
+                                "key": "down",
+                                "presses": 1,
+                                "interval": 0.1
+                            }
+                        ],
+                        [
+                            "wait",
+                            {
+                                "seconds": 1
+                            }
+                        ],
+                        [
+                            "keyboard_hotkey",
+                            {
+                                "keys": ["shift", "tab"],
+                                "presses": 2,
+                                "interval": 0.1
+                            }
+                        ]
+                    ]
+                }
+            ],
+            [
+                "back_to_top",
+                {}
+            ]
+        ]
+    },
+    "icd10_codes": {
+        "require_data": [
+            "clinical_icd10_codes"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "loop_array",
+                {
+                    "data_name": "clinical_icd10_codes",
+                    "skip_in_last_loop": 1,
+                    "loop_actions": [
+                        [
+                            "keyboard_write",
+                            {
+                                "can_paste": true,
+                                "interval": 0.01
+                            }
+                        ],
+                        [
+                            "keyboard_press",
+                            {
+                                "key": "enter",
+                                "presses": 1,
+                                "interval": 0.1
+                            }
+                        ],
+                        [
+                            "check_loading",
+                            {
+                                "template_name": "check_code_results",
+                                "close_window": false,
+                                "select_result": false
+                            }
+                        ],
+                        [
+                            "keyboard_press",
+                            {
+                                "key": "tab",
+                                "presses": 2,
+                                "interval": 0.1
+                            }
+                        ],
+                        [
+                            "keyboard_press",
+                            {
+                                "key": "down",
+                                "presses": 1,
+                                "interval": 0.1
+                            }
+                        ],
+                        [
+                            "keyboard_hotkey",
+                            {
+                                "keys": ["shift", "tab"],
+                                "presses": 2,
+                                "interval": 0.1
+                            }
+                        ]
+                    ]
+                }
+            ]
+        ]
+    }
+}

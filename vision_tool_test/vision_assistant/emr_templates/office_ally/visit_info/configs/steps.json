@@ -1,0 +1,127 @@
+{
+    "patient_id": {
+        "require_data": [
+            "person_last_name",
+            "person_birth_date"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "load_patient_id",
+                    "close_window": true
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "person_last_name",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 4,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "person_birth_date",
+                    "can_paste": false,
+                    "interval": 0.01
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 4,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "select_button",
+                    "close_window": true,
+                    "select_result": true
+                }
+            ]
+        ]
+    },
+    "provider_id": {
+        "require_data": [
+            "provider_last_name"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "load_provider_id",
+                    "close_window": true
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "provider_last_name",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter"
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "select_button",
+                    "close_window": true,
+                    "select_result": true
+                }
+            ]
+        ]
+    }
+}

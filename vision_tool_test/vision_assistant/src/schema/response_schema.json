@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "to_user": {
+        "type": "string",
+        "description": "The username of the recipient"
+      },
+      "executed_action": {
+        "type": "string",
+        "description": "A string descriptor of the executed action"
+      },
+      "type": {
+        "type": "string",
+        "enum": ["standard", "all_done", "complete", "critical"],
+        "description": "The type of message from enum"
+      },
+      "patient_name": {
+        "type": "string",
+        "description": "Patient name for display"
+      }
+    },
+    "required": ["to_user", "executed_action", "type"],
+    "additionalProperties": false
+  }
+  

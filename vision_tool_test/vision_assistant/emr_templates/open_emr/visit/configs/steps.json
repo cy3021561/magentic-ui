@@ -1,0 +1,148 @@
+{
+    "visit_category": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "pageup",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "O",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    },
+    "encounter_provider": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "pageup",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "M",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    },
+    "service_date": {
+        "require_data": ["billing_service_date"],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_hotkey",
+                {
+                    "keys": ["<MODIFIER_KEY>", "a"]
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "billing_service_date",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    },
+    "save_button": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ]
+        ]
+    }
+}

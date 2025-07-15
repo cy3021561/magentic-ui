@@ -132,7 +132,7 @@ class VncDockerPlaywrightBrowser(
             name=self._docker_name,
             image=self._image,
             detach=True,
-            auto_remove=True,  # Disable auto-remove for debugging
+            auto_remove=True,  # Re-enable auto-remove now that issues are fixed
             network=self._network_name if self._inside_docker else None,
             ports={
                 f"6080/tcp": ("127.0.0.1", self._novnc_port),

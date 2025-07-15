@@ -1,0 +1,84 @@
+{
+    "search_name": {
+        "require_data": [
+            "person_first_name"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "person_first_name",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "search_birth_date": {
+        "require_data": [
+            "person_birth_date"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "person_birth_date",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 7,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "check_patient_page",
+                    "close_window": false,
+                    "select_result": false
+                }
+            ]
+        ]
+    }
+}

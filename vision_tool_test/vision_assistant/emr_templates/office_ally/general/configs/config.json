@@ -1,0 +1,106 @@
+{
+    "pages": {
+        "general": {
+            "images": "general/images",
+            "configs": "general/configs"
+        },
+        "patient": {
+            "images": "patient_input/images",
+            "configs": "patient_input/configs"
+        },
+        "insurance": {
+            "images": "insurance_input/images",
+            "configs": "insurance_input/configs"
+        },
+        "visit_info": {
+            "images": "visit_info/images",
+            "configs": "visit_info/configs"
+        },
+        "billing_info": {
+            "images": "billing_info/images",
+            "configs": "billing_info/configs"
+        },
+        "billing_options": {
+            "images": "billing_options/images",
+            "configs": "billing_options/configs"
+        }
+    },
+    "task_route": {
+        "add_new_patient": [
+            "manage_patient_tab",
+            "add_new_patient"
+        ],
+        "add_new_visit": [
+            "patient_visits_tab",
+            "add_new_visit"
+        ]
+    },
+    "tasks": {
+        "add_new_patient": {
+            "initial_page": "patient",
+            "operations": [
+                {
+                    "method": "initialize_task",
+                    "kwargs": {
+                        "task_name": "add_new_patient"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_within_task",
+                    "kwargs": {
+                        "target_page": "insurance"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                }
+            ]
+        },
+        "add_new_visit": {
+            "initial_page": "visit_info",
+            "operations": [
+                {
+                    "method": "initialize_task",
+                    "kwargs": {
+                        "task_name": "add_new_visit"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_within_task",
+                    "kwargs": {
+                        "target_page": "billing_info"
+                    }
+                },
+                {
+                    "method": "change_to_sub_page",
+                    "kwargs": {
+                        "target_button": "ICD_type_9_to_10"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_within_task",
+                    "kwargs": {
+                        "target_page": "billing_options"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                }
+            ]
+        }
+    }
+}

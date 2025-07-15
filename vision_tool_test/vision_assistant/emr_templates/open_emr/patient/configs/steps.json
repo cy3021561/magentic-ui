@@ -1,0 +1,304 @@
+{
+    "first_name": {
+        "require_data": [
+            "person_first_name"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "person_first_name",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "last_name": {
+        "require_data": [
+            "person_last_name"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "person_last_name",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "birth_date": {
+        "require_data": [
+            "person_birth_date"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "person_birth_date",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "legal_sex": {
+        "require_data": [
+            "person_sex"
+        ],
+        "actions": [
+            [
+                "get_selection_options",
+                {}
+            ],
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "pageup",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_release_all_keys",
+                {}
+            ],
+            [
+                "keyboard_press",
+                {
+                    "data_name": "person_sex",
+                    "key": null,
+                    "presses": null,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    },
+    "address1": {
+        "require_data": [
+            "contact_address_line1"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "contact_address_line1",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "zip_code": {
+        "require_data": [
+            "contact_zip"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "contact_zip",
+                    "can_paste": false,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "insurance_provider": {
+        "require_data": [
+            "insurance_primary_company"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "load_insurance_provider",
+                    "close_window": true
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 2,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "insurance_primary_company",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 13,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    },
+    "create_new_patient": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "confirm_new_patient",
+                    "close_window": false,
+                    "select_result": true
+                }
+            ]
+        ]
+    }
+}

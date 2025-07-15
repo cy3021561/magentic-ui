@@ -1,0 +1,37 @@
+{
+    "admin_button": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "down",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    }
+}

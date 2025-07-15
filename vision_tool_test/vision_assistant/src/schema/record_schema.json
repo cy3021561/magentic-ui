@@ -1,0 +1,106 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Patient records ready for autofill",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "selected_emr": {
+                "type": "string",
+                "description": "String name of EMR to execute the autofill"
+            },
+            "page_id": {
+                "type": "string",
+                "description": "String page id passed from server"
+            },
+            "encounter_information": {
+                "type": "object",
+                "properties": {
+                    "updated_treatment_activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "service_date": {
+                                    "type": "string"
+                                },
+                                "hcpc_code": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "service_date",
+                                "hcpc_code"
+                            ],
+                            "description": "Misnamed, but these are the CPT codes for encounter generation"
+                        }
+                    },
+                    "updated_icd10": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "icd10_code": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "icd10_code"
+                            ],
+                            "description": "ICD-10 codes for encounter generation."
+                        }
+                    }
+                },
+                "required": [
+                    "updated_treatment_activities",
+                    "updated_icd10"
+                ],
+                "description": "Object containing medical information related to encounter generation"
+            },
+            "personal_information": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "bbox": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "minItems": 0,
+                                    "maxItems": 4,
+                                    "description": "Bounding box represented as an array scaled to image"
+                                },
+                                "text": {
+                                    "type": "string",
+                                    "description": "Text content of the item"
+                                },
+                                "confidence": {
+                                    "type": "number",
+                                    "minimum": 0,
+                                    "maximum": 1,
+                                    "description": "Confidence score between 0 and 1"
+                                }
+                            },
+                            "required": [
+                                "text"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                },
+                "description": "Object containing medical information related to patient generation"
+            }
+        },
+        "required": [
+            "selected_emr",
+            "page_id",
+            "encounter_information",
+            "personal_information"
+        ]
+    }
+}

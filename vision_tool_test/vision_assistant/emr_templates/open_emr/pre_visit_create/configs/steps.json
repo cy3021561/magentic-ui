@@ -1,0 +1,29 @@
+{
+    "create_encounter_button": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "check_new_encounter_page",
+                    "close_window": false,
+                    "select_result": false
+                }
+            ]
+        ]
+    }
+}

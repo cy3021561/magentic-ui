@@ -1,0 +1,92 @@
+{
+    "billing_provider": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "load_billing_provider",
+                    "close_window": true
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 9,
+                    "interval": 0.05
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    },
+    "hospital_dates": {
+        "require_data": [
+            "billing_service_date"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "billing_service_date",
+                    "can_paste": false,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "finish_add_visit": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ]
+        ]
+    }
+}

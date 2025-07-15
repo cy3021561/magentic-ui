@@ -1,0 +1,110 @@
+{
+    "insurance_co_primary": {
+        "require_data": [
+            "insurance_primary_company"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "check_loading",
+                {
+                    "template_name": "load_insurance_co",
+                    "close_window": true
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "insurance_primary_company",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "tab",
+                    "presses": 12,
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_press",
+                {
+                    "key": "enter",
+                    "presses": 1,
+                    "interval": 0.1
+                }
+            ]
+        ]
+    },
+    "subscriber_id_primary": {
+        "require_data": [
+            "insurance_primary_subscriber_id"
+        ],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ],
+            [
+                "keyboard_write",
+                {
+                    "data_name": "insurance_primary_subscriber_id",
+                    "can_paste": true,
+                    "interval": 0.01
+                }
+            ]
+        ]
+    },
+    "finish_add_patient": {
+        "require_data": [],
+        "actions": [
+            [
+                "mouse_move",
+                {
+                    "smooth": true
+                }
+            ],
+            [
+                "mouse_click",
+                {
+                    "clicks": 1,
+                    "button": "left",
+                    "interval": 0.1
+                }
+            ]
+        ]
+    }
+}

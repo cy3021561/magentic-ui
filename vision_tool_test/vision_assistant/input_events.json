@@ -1,0 +1,131 @@
+{
+  "total_sections": 5,
+  "sections": {
+    "1": [
+      {
+        "timestamp": "2025-01-15T10:16:12.211950",
+        "type": "section",
+        "details": {
+          "action": "start",
+          "section_number": 1
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:19.805886",
+        "type": "mouse",
+        "details": {
+          "action": "click",
+          "button": "Button.left",
+          "position": {
+            "x": -934.1072387695312,
+            "y": 683.3316040039062
+          }
+        }
+      }
+    ],
+    "2": [
+      {
+        "timestamp": "2025-01-15T10:16:21.956127",
+        "type": "section",
+        "details": {
+          "action": "start",
+          "section_number": 2
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:23.740595",
+        "type": "keyboard",
+        "details": {
+          "action": "press",
+          "key": "z"
+        }
+      }
+    ],
+    "3": [
+      {
+        "timestamp": "2025-01-15T10:16:24.764286",
+        "type": "section",
+        "details": {
+          "action": "start",
+          "section_number": 3
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:25.663639",
+        "type": "keyboard",
+        "details": {
+          "action": "press",
+          "key": "x"
+        }
+      }
+    ],
+    "4": [
+      {
+        "timestamp": "2025-01-15T10:16:26.586736",
+        "type": "section",
+        "details": {
+          "action": "start",
+          "section_number": 4
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:27.357131",
+        "type": "keyboard",
+        "details": {
+          "action": "press",
+          "key": "c"
+        }
+      }
+    ],
+    "5": [
+      {
+        "timestamp": "2025-01-15T10:16:28.522131",
+        "type": "section",
+        "details": {
+          "action": "start",
+          "section_number": 5
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:31.233073",
+        "type": "keyboard",
+        "details": {
+          "action": "hotkey",
+          "combination": "Key.cmd+z"
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:33.023054",
+        "type": "keyboard",
+        "details": {
+          "action": "hotkey",
+          "combination": "Key.cmd+s"
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:35.455788",
+        "type": "mouse",
+        "details": {
+          "action": "click",
+          "button": "Button.left",
+          "position": {
+            "x": -1010.7539672851562,
+            "y": 1034.909912109375
+          }
+        }
+      },
+      {
+        "timestamp": "2025-01-15T10:16:36.288000",
+        "type": "mouse",
+        "details": {
+          "action": "click",
+          "button": "Button.left",
+          "position": {
+            "x": -993.95361328125,
+            "y": 1008.8017578125
+          }
+        }
+      }
+    ]
+  }
+}

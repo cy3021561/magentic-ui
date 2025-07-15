@@ -1,0 +1,155 @@
+{
+    "pages": {
+        "general": {
+            "images": "general/images",
+            "configs": "general/configs"
+        },
+        "patient": {
+            "images": "patient/images",
+            "configs": "patient/configs"
+        },
+        "pre_patient_contact": {
+            "images": "pre_patient_contact/images",
+            "configs": "pre_patient_contact/configs"
+        },
+        "pre_patient_insurance": {
+            "images": "pre_patient_insurance/images",
+            "configs": "pre_patient_insurance/configs"
+        },
+        "visit": {
+            "images": "visit/images",
+            "configs": "visit/configs"
+        },
+        "pre_visit_search":{
+            "images": "pre_visit_search/images",
+            "configs": "pre_visit_search/configs"
+        },
+        "pre_visit_create":{
+            "images": "pre_visit_create/images",
+            "configs": "pre_visit_create/configs"
+        },
+        "billing": {
+            "images": "billing/images",
+            "configs": "billing/configs"
+        },
+        "pre_billing":{
+            "images": "pre_billing/images",
+            "configs": "pre_billing/configs"
+        },
+        "post_billing":{
+            "images": "post_billing/images",
+            "configs": "post_billing/configs"
+        }
+    },
+    "task_route": {
+        "add_new_patient": [
+            "patient_tab",
+            "new_or_search_tab"
+        ],
+        "add_new_visit": [
+            "finder_tab"
+        ]
+    },
+    "tasks": {
+        "add_new_patient": {
+            "initial_page": "pre_patient_contact",
+            "operations": [
+                {
+                    "method": "initialize_task",
+                    "kwargs": {
+                        "task_name": "add_new_patient"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_info",
+                    "kwargs": {
+                        "target_page": "pre_patient_insurance"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_info",
+                    "kwargs": {
+                        "target_page": "patient"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                }
+            ]
+        },
+        "add_new_visit": {
+            "initial_page": "pre_visit_search",
+            "operations": [
+                {
+                    "method": "initialize_task",
+                    "kwargs": {
+                        "task_name": "add_new_visit"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_info",
+                    "kwargs": {
+                        "target_page": "pre_visit_create"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_info",
+                    "kwargs": {
+                        "target_page": "visit"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_info",
+                    "kwargs": {
+                        "target_page": "pre_billing"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_info",
+                    "kwargs": {
+                        "target_page": "billing"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                },
+                {
+                    "method": "change_page_info",
+                    "kwargs": {
+                        "target_page": "post_billing"
+                    }
+                },
+                {
+                    "method": "execute_page",
+                    "args": []
+                }
+            ]
+        }
+    }
+}

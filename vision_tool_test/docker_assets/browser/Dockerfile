@@ -1,81 +1,86 @@
 FROM node:lts-slim
 
-# Avoid prompts from apt
+# Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PLAYWRIGHT_BROWSERS_PATH=/usr/bin/playwright_browsers
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
+# 1. Install System Dependencies (Least frequent changes)
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     xvfb \
     x11vnc \
     openbox \
-    supervisor \
     python3 \
     python3-pip \
-    util-linux \
+    python3-tk \
+    scrot \
+    xclip \
+    libxtst6 \
+    libxrandr2 \
+    libxfixes3 \
+    libxdamage1 \
+    libxcursor1 \
+    libnss3 \
+    libgtk-3-0 \
+    libasound2 \
+    supervisor \
     xauth \
     x11-xserver-utils \
-    scrot \
-    python3-tk \
-    && rm -rf /var/lib/apt/lists/*
+    util-linux \
+    bsdutils \
+    gnome-screenshot \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install noVNC
-RUN git clone --depth 1 --branch v1.6.0 https://github.com/novnc/noVNC.git /usr/local/novnc \
-    && git clone --depth 1 --branch v0.13.0 https://github.com/novnc/websockify /usr/local/novnc/utils/websockify
+# 1.5. Install noVNC for web-based VNC access
+RUN git clone https://github.com/novnc/noVNC.git /usr/local/novnc \
+    && git clone https://github.com/novnc/websockify.git /usr/local/novnc/utils/websockify \
+    && chmod +x /usr/local/novnc/utils/websockify/run
 
-# Set up working directory
+# 2. Install Node.js Dependencies (Infrequent changes)
 WORKDIR /app
-
-# Install Playwright
-COPY package.json package-lock.json* ./
+COPY vision_tool_test/docker_assets/browser/package.json vision_tool_test/docker_assets/browser/package-lock.json* ./
 RUN npm install .
-RUN npm install \
-    && npm install playwright \
-    && npx playwright install --with-deps
 
-# Install browsers with dependencies
-RUN npx playwright install --with-deps chromium
+# 3. Install Playwright (Infrequent changes)
+RUN npx playwright install --with-deps
 
-# Set up supervisord configuration
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# 4. Install Python base packages (Infrequent changes)
+RUN pip3 install --break-system-packages --no-cache-dir \
+    autogen-core \
+    docker \
+    playwright==1.53.0 \
+    pydantic \
+    loguru \
+    pyautogui==0.9.54 \
+    python3-xlib \
+    Pillow \
+    websockets
 
-# Copy scripts
-COPY start.sh /app/start.sh
-COPY playwright-server.js /app/playwright-server.js
-COPY x11-setup.sh /usr/bin/x11-setup.sh
-RUN chmod +x /usr/bin/x11-setup.sh
+# 5. Install the vision_assistant package (Changes when setup.py changes)
+COPY vision_tool_test/vision_assistant/setup.py /app/vision_assistant/setup.py
+COPY vision_tool_test/vision_assistant/src /app/vision_assistant/src
+COPY vision_tool_test/vision_assistant/emr_templates /app/emr_templates
+RUN pip3 install --break-system-packages /app/vision_assistant
 
-# Make scripts executable
-RUN chmod +x /app/start.sh
+# 6. Copy Application Code and Scripts (Most frequent changes)
+COPY vision_tool_test/vision_assistant /app/vision_assistant
+COPY vision_tool_test/docker_assets/browser/ /app/
 
-# Create a simple openbox configuration to only show the browser window
+# Set up file permissions and configurations
+RUN chmod +x /app/start.sh \
+    && chmod +x /app/x11-setup.sh \
+    && chmod +x /app/entrypoint.sh
+COPY vision_tool_test/docker_assets/browser/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir -p /root/.config/openbox
-COPY openbox-rc.xml /root/.config/openbox/rc.xml
+COPY vision_tool_test/docker_assets/browser/openbox-rc.xml /root/.config/openbox/rc.xml
 
-# Expose ports: noVNC web interface, and Playwright server
-EXPOSE 6080 37367
+# Set PYTHONPATH to include the vision assistant's src directory
+ENV PYTHONPATH="/app/vision_assistant/src:/app/vision_assistant:${PYTHONPATH}"
 
-ENV PLAYWRIGHT_WS_PATH="default"
+# Set EMR templates directory for vision_assistant
+ENV VISION_ASSISTANT_TEMPLATES="/app/emr_templates"
 
-# Set the display environment variable
-ENV DISPLAY=:99
-
-RUN mkdir -p /workspace
+# Set up the workspace and entrypoint
 WORKDIR /workspace
-
-# Install pyautogui and its dependencies
-RUN pip3 install --break-system-packages pyautogui python3-xlib
-
-# Copy your application scripts
-COPY pyautogui_app.py /app/pyautogui_app.py
-COPY test_x11.py /app/test_x11.py
-
-# Remove the redundant copy of playwright-server.js
-
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
-
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
-# Start services
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["/app/start.sh"]
