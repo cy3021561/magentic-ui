@@ -1,54 +1,65 @@
 import asyncio
+import os
 import sys
 from pathlib import Path
 
-# Add the parent directory to Python path
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from src.browser_manager.vnc_browser import (
-    VncDockerPlaywrightBrowser,
-)
+# Add the project's root directory to the Python path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
 async def main():
-    """
-    Orchestrates the browser automation task.
-    1. Starts a VNC-enabled browser container.
-    2. Uses Playwright to connect and set up the browser.
-    3. Executes the pyautogui script inside the container using `docker exec`.
-    4. Cleans up all resources automatically.
-    """
-    # Define the workspace directory. This will be mounted into the container.
-    workspace_dir = Path("./workspace").resolve()
-    workspace_dir.mkdir(exist_ok=True)
-    
-    # Clean up any existing trigger files from previous runs
-    trigger_file = workspace_dir / "trigger.txt"
-    if trigger_file.exists():
-        print(f"🧹 Cleaning up existing trigger file: {trigger_file}")
-        trigger_file.unlink()
+    """Main function to run the browser automation"""
+    # Get the OpenAI API key
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if not openai_api_key:
+        print("❌ Missing OPENAI_API_KEY environment variable. WebSurfer will be disabled.")
 
-    browser_manager = VncDockerPlaywrightBrowser(
-        bind_dir=workspace_dir,
-        image="magentic-ui-vnc-browser:latest",
-    )
-
+    # Use the WebSurferManager as a context manager
     try:
-        async with browser_manager as bm:
-            print(f"✅ VNC Live View available at: {bm.vnc_address}")
+        async with WebSurferManager(openai_api_key=os.getenv("OPENAI_API_KEY")) as websurfer_manager:
+            # Initialization is now handled inside the manager's context entry
+            if await websurfer_manager.initialize():
+                print("✅ WebSurfer initialized successfully")
 
-            # Use Playwright to set up the initial browser state
-            page = await bm.browser_context.new_page()
-            await page.goto("https://officeally.com/")
-            print("✅ Browser setup complete - Officeally.com loaded.")
+                # Get login credentials
+                username = "cyang513"
+                password = "SACFbridgent12345"
+                
+                # VNC link is now available from the manager's browser instance
+                if websurfer_manager.vnc_browser:
+                    print(f"✅ VNC Live View available at: {websurfer_manager.vnc_browser.vnc_address}")
+                    print(f"📡 Container: {websurfer_manager.vnc_browser.container_name}")
 
-            await asyncio.sleep(30000)
+                # Perform login
+                print("🚀 Starting login process...")
+                success = await websurfer_manager.navigate_and_login(
+                    url="https://www.officeally.com",
+                    username=username,
+                    password=password
+                )
+                
+                if success:
+                    print("✅ Login successful!")
+                else:
+                    print("❌ Login failed.")
 
+            else:
+                print("WebSurfer could not be initialized. Please check your API key and dependencies.")
+            
+            # Keep the container running until keyboard interrupt
+            print("🕒 Script finished. Press Ctrl+C to exit...")
+            try:
+                await asyncio.Event().wait()  # Wait indefinitely until interrupted
+            except KeyboardInterrupt:
+                print("\n👋 Received keyboard interrupt, shutting down...")
+            
     except Exception as e:
-        print(f"An error occurred: {e}")
-    finally:
-        print("\nAll tasks finished. The container will be stopped automatically.")
-
+        print(f"An error occurred in the main execution: {e}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
+    # Since this file is in 'src', we need to adjust the path to import from 'browser_manager'
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+    from browser_manager.websurfer_manager import WebSurferManager
     asyncio.run(main())

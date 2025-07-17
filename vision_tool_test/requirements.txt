@@ -1,8 +1,14 @@
-autogen-core
-docker
 playwright==1.53.0
+docker
 pydantic
 loguru
-pyautogui
-aiofiles
-uv 
+pyautogui==0.9.54
+python3-xlib
+Pillow
+websockets
+# WebSurfer dependencies
+autogen-agentchat>=0.4.0
+autogen-core>=0.4.0
+openai>=1.0.0
+tiktoken
+tldextract 

@@ -38,7 +38,7 @@ RUN git clone https://github.com/novnc/noVNC.git /usr/local/novnc \
 
 # 2. Install Node.js Dependencies (Infrequent changes)
 WORKDIR /app
-COPY vision_tool_test/docker_assets/browser/package.json vision_tool_test/docker_assets/browser/package-lock.json* ./
+COPY docker_assets/browser/package.json docker_assets/browser/package-lock.json* ./
 RUN npm install .
 
 # 3. Install Playwright (Infrequent changes)
@@ -57,25 +57,25 @@ RUN pip3 install --break-system-packages --no-cache-dir \
     websockets
 
 # 5. Install the vision_assistant package (Changes when setup.py changes)
-COPY vision_tool_test/vision_assistant/setup.py /app/vision_assistant/setup.py
-COPY vision_tool_test/vision_assistant/src /app/vision_assistant/src
-COPY vision_tool_test/vision_assistant/emr_templates /app/emr_templates
+COPY vision_assistant/setup.py /app/vision_assistant/setup.py
+COPY vision_assistant/src /app/vision_assistant/src
+COPY vision_assistant/emr_templates /app/emr_templates
 RUN pip3 install --break-system-packages /app/vision_assistant
 
 # 6. Copy Application Code and Scripts (Most frequent changes)
-COPY vision_tool_test/vision_assistant /app/vision_assistant
-COPY vision_tool_test/docker_assets/browser/ /app/
+COPY vision_assistant /app/vision_assistant
+COPY docker_assets/browser/ /app/
 
 # Set up file permissions and configurations
 RUN chmod +x /app/start.sh \
     && chmod +x /app/x11-setup.sh \
     && chmod +x /app/entrypoint.sh
-COPY vision_tool_test/docker_assets/browser/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker_assets/browser/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir -p /root/.config/openbox
-COPY vision_tool_test/docker_assets/browser/openbox-rc.xml /root/.config/openbox/rc.xml
+COPY docker_assets/browser/openbox-rc.xml /root/.config/openbox/rc.xml
 
 # Set PYTHONPATH to include the vision assistant's src directory
-ENV PYTHONPATH="/app/vision_assistant/src:/app/vision_assistant:${PYTHONPATH}"
+ENV PYTHONPATH="/app/vision_assistant/src:/app/vision_assistant:/app/src:${PYTHONPATH}"
 
 # Set EMR templates directory for vision_assistant
 ENV VISION_ASSISTANT_TEMPLATES="/app/emr_templates"
